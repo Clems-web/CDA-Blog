@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome !{% endblock %}
+
+{% block body %}
+    <div class="articleIdContainer">
+        <div class="divTitle">
+            <h1>{{ article.title }}</h1>
+            <p>Ecrit par {{ article.author.username }} le {{ article.publishedDate.getTimestamp()|date }}</p>
+        </div>
+        <div class="articleContent">
+            {{ article.content|raw }}
+        </div>
+        <div class="commentContainer">
+            {% for comment in article.comments %}
+                <div class="commentContentContainer">
+                    <h2>{{ comment.author.username}}</h2>
+                    <h4>{{ comment.date|date }}</h4>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if app.user %}
+        {{ form(form) }}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome !{% endblock %}
+
+{% block body %}
+
+    <div class="divTitle">
+        {% if app.user %}
+            <h1>Bien le bonjour {{ app.user.username }}</h1>
+            <button id="buttonLogOut"><a href="{{ path('app_logout') }}">Se déconnecter</a></button>
+        {% else %}
+            <h1>Bonjour !</h1>
+            <ul>
+                <li>
+                    <button>
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <a href="{{ path('app_register') }}">S'inscrire</a>
+                    </button>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="mainContainer">
+
+        {% for article in articles %}
+            <div class="articleContainer">
+                <a href="{{ path('article_id', {'id': article.id}) }}">{{ article.title }}</a>
+                <h3>Publié le {{ article.getPublishedDate().getTimestamp()|date }} par {{ article.getAuthor().getUsername() }}</h3>
+                <div>
+                    {{ article.shortdescrition}}...
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}
