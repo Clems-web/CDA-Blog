@@ -5,9 +5,12 @@ namespace App\Form;
 use App\Entity\Article;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -22,6 +25,9 @@ class ArticleType extends AbstractType
             ->add('shortdescrition', TextType::class, [
                 'label' => 'Description courte'
             ])
+            ->add('thumbnail', FileType::class, [
+                'label' => 'Votre image',
+            ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Votre Article',
                 'constraints' => [
@@ -30,6 +36,13 @@ class ArticleType extends AbstractType
                         'max' => 1500,
                     ]),
                 ],
+            ])
+            ->add('draft', ChoiceType::class, [
+                'label' => 'Est-ce un brouillon ?',
+                'choices' => [
+                    'Oui'=> false,
+                    'Non' => true
+                ]
             ])
             ->add('Publier', SubmitType::class)
         ;

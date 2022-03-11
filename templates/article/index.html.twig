@@ -28,13 +28,22 @@
     <div class="mainContainer">
 
         {% for article in articles %}
-            <div class="articleContainer">
-                <a href="{{ path('article_id', {'id': article.id}) }}">{{ article.title }}</a>
-                <h3>Publié le {{ article.getPublishedDate().getTimestamp()|date }} par {{ article.getAuthor().getUsername() }}</h3>
-                <div>
-                    {{ article.shortdescrition}}...
+            {% if article.draft %}
+                <div class="articleContainer">
+                    <div>
+                        <img src="/thumbnail/{{ article.thumbnail }}">
+                    </div>
+                    <div>
+                        <a href="{{ path('article_id', {'id': article.id}) }}">{{ article.title }}</a>
+                        <h3>Publié le {{ article.getPublishedDate().getTimestamp()|date }}
+                            par <img class="avatar" src="/avatar/{{ article.author.avatar }}">{{ article.author.username }}</h3>
+                        <div>
+                            {{ article.shortdescrition}}...
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 

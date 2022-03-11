@@ -34,6 +34,12 @@ class Article
     #[ORM\Column(type: 'string', length: 255)]
     private $shortdescrition;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $thumbnail;
+
+    #[ORM\Column(type: 'boolean')]
+    private $draft;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -130,6 +136,30 @@ class Article
     public function setShortdescrition(string $shortdescrition): self
     {
         $this->shortdescrition = $shortdescrition;
+
+        return $this;
+    }
+
+    public function getThumbnail(): string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getDraft(): ?bool
+    {
+        return $this->draft;
+    }
+
+    public function setDraft(bool $draft): self
+    {
+        $this->draft = $draft;
 
         return $this;
     }

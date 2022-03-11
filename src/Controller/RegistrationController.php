@@ -32,6 +32,19 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $file = $form['avatar']->getData();
+            if ($file) {
+                $fileName = $file->getClientOriginalName().uniqid();
+                $file->move('avatar', $fileName);
+                $user->setAvatar($fileName);
+            }
+            else {
+                $user->setAvatar('default.png');
+            }
+
+
+
+
             $user->setRoles(['ROLE_USER']);
             $entityManager->persist($user);
             $entityManager->flush();

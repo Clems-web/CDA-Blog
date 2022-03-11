@@ -11,9 +11,11 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ArticleController extends AbstractController
 {
@@ -36,6 +38,17 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
+
+
+            $file = $form['thumbnail']->getData();
+            $ext = $file->guessExtension();
+            if (!$ext) {
+                $ext = 'bin';
+            }
+
+            $fileName = $file->getClientOriginalName().uniqid();
+            $file->move('thumbnail', $fileName);
+            $article->setThumbnail( $fileName);
 
             $article->setAuthor($this->getUser());
             $article->setPublishedDate(new \DateTime());
