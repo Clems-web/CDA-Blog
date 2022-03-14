@@ -91,4 +91,50 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[IsGranted('ROLE_AUTHOR')]
+    #[Route('/article/edit/{id}', name: 'article_edit')]
+    public function edit(Article $article, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ArticleType::class, $article);
+        $oldImg = $article->getThumbnail();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $imageFile = $form['thumbnail']->getData();
+
+            if (!empty($imageFile)) {
+
+                $fileName = $imageFile->getClientOriginalName().uniqid();
+                $imageFile->move('thumbnail', $fileName);
+                $article->setThumbnail($fileName);
+
+            }
+
+            else {
+                $article->setThumbnail($oldImg);
+            }
+
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_user');
+        }
+
+        return $this->render('article/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[IsGranted('ROLE_AUTHOR')]
+    #[Route('article/delete/{id}', name: 'article_delete')]
+    public function del(Article $article, EntityManagerInterface $entityManager) {
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+
+        return $this->redirectToRoute('app_user');
+    }
 }

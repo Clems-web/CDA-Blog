@@ -43,7 +43,22 @@ body {
                 }
             }
         }
-        #buttonLogOut {
+        #buttonLogOut{
+            border: 1px solid white;
+            border-radius: 5px;
+            padding: 1rem;
+            width: 10%;
+            height: 8rem;
+            background: rgba(255, 255, 255, 0.1);
+
+            a {
+                font-size: 1.5rem;
+                text-decoration: none;
+                color: white;
+            }
+        }
+
+        #buttonProfil {
             border: 1px solid white;
             border-radius: 5px;
             padding: 1rem;
@@ -68,6 +83,13 @@ body {
         }
 
         #buttonLogOut:hover {
+            background: rgba(255, 255, 255, 1);
+            a {
+                color: #EEAECAFF;
+            }
+        }
+
+        #buttonProfil:hover {
             background: rgba(255, 255, 255, 1);
             a {
                 color: #EEAECAFF;
@@ -243,6 +265,117 @@ body {
             }
         }
     }
+
+    #profileContainer {
+        width: 100%;
+        height: fit-content;
+
+        #userInfo {
+            padding-top: 4rem;
+            text-align: center;
+
+            a {
+                color: black;
+                font-size: 2rem;
+                text-decoration: none;
+            }
+        }
+
+        .articleContainer {
+            width: 60%;
+            height: fit-content;
+            margin-left: 20%;
+            margin-top: 8rem;
+            margin-bottom: 8rem;
+
+            h2 {
+                font-size: 5rem;
+                text-align: center;
+                margin-bottom: 2rem;
+                color: white;
+                letter-spacing: 0.8rem;
+                width: 100%;
+            }
+            a {
+                font-size: 2rem;
+                text-decoration: none;
+                margin-right: 1rem;
+            }
+
+            .article {
+                display: flex;
+                align-items: center;
+                padding: 2rem;
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 8px -8px #303a3f;
+                margin-top: 5rem;
+
+                .imgContainer img {
+                    width: 25rem;
+                    height: 25rem;
+                }
+
+                .articleInfos {
+                    font-size: 3rem;
+                    margin-left: 8rem;
+
+                    a {
+                        font-size: 4rem;
+                        color: white;
+                        letter-spacing: 0.5rem;
+                        text-decoration: none;
+                    }
+
+                    h3 {
+                        font-size: 2rem;
+                        color: rgba(14,40,25,0.29);
+                    }
+
+                    div {
+                        margin-top: 2rem;
+                        font-size: 3rem;
+                    }
+                }
+            }
+        }
+
+        #userCommentContainer {
+            width: 100%;
+            height: fit-content;
+            margin: 8rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+            .userComment {
+                width: 80%;
+                margin: 4rem 0;
+                height: fit-content;
+                padding: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 8px -8px #303a3f;
+
+                font-size: 4rem;
+
+                h3 {
+                    font-size: 2rem;
+                    color: rgba(14,40,25,0.29);
+
+                    a {
+                        text-decoration: none;
+                        font-size: 2rem;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+    }
+
 
 }
 

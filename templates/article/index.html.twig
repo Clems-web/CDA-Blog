@@ -7,7 +7,10 @@
     <div class="divTitle">
         {% if app.user %}
             <h1>Bien le bonjour {{ app.user.username }}</h1>
+            <button id="buttonProfil"><a href="{{ path('app_user') }}">Profil</a></button>
             <button id="buttonLogOut"><a href="{{ path('app_logout') }}">Se déconnecter</a></button>
+
+
         {% else %}
             <h1>Bonjour !</h1>
             <ul>

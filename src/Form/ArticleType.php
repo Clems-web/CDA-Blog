@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -27,6 +26,9 @@ class ArticleType extends AbstractType
             ])
             ->add('thumbnail', FileType::class, [
                 'label' => 'Votre image',
+                'data_class' => null,
+                'required' => false,
+                'mapped' => false
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Votre Article',

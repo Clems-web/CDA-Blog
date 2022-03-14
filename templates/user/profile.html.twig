@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ app.user.username }}{% endblock %}
+
+{% block body %}
+
+    <div id="profileContainer">
+        <div id="userInfo">
+            <h1>{{ app.user.username }}</h1>
+            <a href="{{ path('user_edit', {'id': app.user.id }) }}">Changer mes informations</a>
+        </div>
+
+        {% if 'ROLE_AUTHOR' in app.user.roles %}
+            <div class="articleContainer">
+                <h2>Mes articles</h2>
+                {% for article in app.user.articles %}
+                    {% if article.draft  %}
+                        <div class="article">
+                            <div class="imgContainer">
+                                <img src="/thumbnail/{{ article.thumbnail }}">
+                            </div>
+                            <div class="articleInfos">
+                                <a href="{{ path('article_id', {'id': article.id}) }}">{{ article.title }}</a>
+                                <h3>Publié le {{ article.getPublishedDate().getTimestamp()|date }}</h3>
+                                <div>
+                                    {{ article.shortdescrition}}...
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ path('article_edit', {'id': article.id}) }}">Editer</a>
+                        <a href="{{ path('article_delete', {'id': article.id}) }}">Supprimer</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
+        <div id="userCommentContainer">
+            <h1>Mes commentaires</h1>
+
+            {% for comment in app.user.comments %}
+                <div class="userComment">
+                    {{ comment.content }}
+                    <h3>Posté le {{ comment.date|date }} sur <a href="{{ path('article_id', {'id': comment.article.id}) }}">{{ comment.article.title }}</a></h3>
+                    <a href="{{ path('comment_remove', {'id': comment.id}) }}">Delete</a>
+                    <a href=" {{ path('comment_edit', { 'id': comment.id }) }}">Edit</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

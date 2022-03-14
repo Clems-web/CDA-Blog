@@ -21,6 +21,7 @@ class Comment
     private $author;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private $article;
 
     #[ORM\Column(type: 'datetime')]

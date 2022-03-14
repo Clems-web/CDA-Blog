@@ -24,13 +24,16 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Votre image de profil (non obligatoire)',
-                'required' => false
+                'required' => false,
+                'mapped' => false,
+                'data_class' => null
             ])
             ->add('email')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'required' => true,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
